@@ -26,9 +26,12 @@ bool load_file(std::string file_path, std::vector<std::string> *file_data){
 }
 
 int main(int argc, char *argv[]){
+    /*
+     * TEMPLATE
+     */
     if (argc < 2){
         std::cout<<"Usage: ./puzzle FILE_PATH"<<std::endl;
-        return 0;
+        return 1;
     }
 
     std::string file_path = argv[1];
@@ -36,8 +39,17 @@ int main(int argc, char *argv[]){
     std::vector<std::string> file_data;
 
     if (!load_file(file_path, &file_data)){
-        return 0;
+        return 1;
     }
 
-    return 1;
+    /*
+     * PART ONE
+     */
+    //part one goes here
+
+    /*
+     * PART TWO
+     */
+    //part two goes here
+    return 0;
 }
