@@ -75,7 +75,7 @@ int main(int argc, char *argv[]){
     int larger_depth_count = 0;
 
     if (!load_file(file_path, &file_data)){
-        return 0;
+        return 1;
     }
 
     /*
@@ -98,5 +98,5 @@ int main(int argc, char *argv[]){
 
     std::cout<<"part2: "<<number_of_larger_sums<<std::endl;
 
-    return 1;
+    return 0;
 }

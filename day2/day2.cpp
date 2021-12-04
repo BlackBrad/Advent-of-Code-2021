@@ -80,7 +80,7 @@ void parse_commands_update_pos_p2(std::vector<std::string> *file_data, positionp
 int main(int argc, char *argv[]){
     if (argc < 2){
         std::cout<<"Usage: ./puzzle FILE_PATH"<<std::endl;
-        return 0;
+        return 1;
     }
 
     std::string file_path = argv[1];
@@ -107,5 +107,5 @@ int main(int argc, char *argv[]){
     int multiplied_p2 = pos_p2.x * pos_p2.y;
     std::cout<<"part2: "<<multiplied_p2<<std::endl;
 
-    return 1;
+    return 0;
 }
