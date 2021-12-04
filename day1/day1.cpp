@@ -45,6 +45,23 @@ void count_larger_depths(int *array, int *count, int *size){
     }
 }
 
+void collect_three_sum_values(int *array, int *size, int *number_of_larger_sums){
+    *number_of_larger_sums = 0;
+    int previous_sum = 0;
+    for (int i = 0; i < *size; i++){
+        if (i + 1 > *size - 1 || i + 2 > *size - 1) return;
+        int sum = array[i] + array[i + 1] + array[i + 2];
+        if (previous_sum == 0){
+            previous_sum = sum;
+            continue;
+        }
+        if (sum > previous_sum){
+            *number_of_larger_sums += 1;
+        }
+        previous_sum = sum;
+    }
+}
+
 int main(int argc, char *argv[]){
     if (argc < 2){
         std::cout<<"Usage: ./puzzle FILE_PATH"<<std::endl;
@@ -61,6 +78,9 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
+    /*
+     * PART ONE
+     */
     // Set the depths array to be the same size as the file data
     depths_size = file_data.size();
     depths = new int[depths_size];
@@ -68,7 +88,15 @@ int main(int argc, char *argv[]){
 
     count_larger_depths(depths, &larger_depth_count, &depths_size);
 
-    std::cout<<larger_depth_count<<std::endl;
+    std::cout<<"part1: "<<larger_depth_count<<std::endl;
+
+    /*
+     * PART TWO
+     */
+    int number_of_larger_sums = 0;
+    collect_three_sum_values(depths, &depths_size, &number_of_larger_sums);
+
+    std::cout<<"part2: "<<number_of_larger_sums<<std::endl;
 
     return 1;
 }
