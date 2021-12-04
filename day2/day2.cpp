@@ -3,6 +3,11 @@
 #include <fstream>
 #include <vector>
 
+typedef struct Position{
+    int x;
+    int y;
+} position_t;
+
 bool load_file(std::string file_path, std::vector<std::string> *file_data){
     std::string temp_line;
     std::ifstream input_file;
@@ -25,6 +30,15 @@ bool load_file(std::string file_path, std::vector<std::string> *file_data){
     return true;
 }
 
+void parse_commands_update_pos(std::vector<std::string> *file_data, position_t *pos){
+    for (int i = 0; i < int(file_data->size()); i++){
+        std::string line = file_data->at(i);
+        int space_pos = line.find(' ');
+        std::string command = line.substr(0, space_pos);
+        int move_value = std::stoi(line.substr(space_pos + 1, line.length()));
+    }
+}
+
 int main(int argc, char *argv[]){
     if (argc < 2){
         std::cout<<"Usage: ./puzzle FILE_PATH"<<std::endl;
@@ -32,12 +46,13 @@ int main(int argc, char *argv[]){
     }
 
     std::string file_path = argv[1];
-
     std::vector<std::string> file_data;
 
-    if (!load_file(file_path, &file_data)){
-        return 0;
-    }
+    load_file(file_path, &file_data);
+
+    // Initialize submarines position
+    position_t pos = {0, 0};
+    parse_commands_update_pos(&file_data, &pos);
 
     return 1;
 }
