@@ -36,6 +36,16 @@ void parse_commands_update_pos(std::vector<std::string> *file_data, position_t *
         int space_pos = line.find(' ');
         std::string command = line.substr(0, space_pos);
         int move_value = std::stoi(line.substr(space_pos + 1, line.length()));
+
+        if (command.compare("up") == 0){
+            // Y is actually a measure of depth, therefore up would decrease
+            // the depth and down would make it increase
+            pos->y -= move_value;
+        } else if (command.compare("down") == 0){
+            pos->y += move_value;
+        } else if (command.compare("forward") == 0){
+            pos->x += move_value;
+        }
     }
 }
 
@@ -53,6 +63,9 @@ int main(int argc, char *argv[]){
     // Initialize submarines position
     position_t pos = {0, 0};
     parse_commands_update_pos(&file_data, &pos);
+
+    int multiplied = pos.x * pos.y;
+    std::cout<<"part1: "<<multiplied<<std::endl;
 
     return 1;
 }
