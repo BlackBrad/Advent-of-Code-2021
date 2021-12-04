@@ -39,9 +39,5 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    for (int i = 0; i < file_data.size(); i++){
-        std::cout<<file_data[i]<<std::endl;
-    }
-
     return 1;
 }
