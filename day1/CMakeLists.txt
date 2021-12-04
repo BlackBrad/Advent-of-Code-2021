@@ -1,5 +1,5 @@
 set(TARGET puzzle)
 
-set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} -g -Wall -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Werror")
 
 add_executable(${TARGET} day1.cpp)
