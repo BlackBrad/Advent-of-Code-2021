@@ -35,6 +35,16 @@ void convert_string_vector_to_array(std::vector<std::string> *string_vector, int
 
 }
 
+void count_larger_depths(int *array, int *count, int *size){
+    int previous_depth = array[0];
+    for (int i = 1; i < *size; i++){
+        if (array[i] > previous_depth){
+            *count += 1;
+        }
+        previous_depth = array[i];
+    }
+}
+
 int main(int argc, char *argv[]){
     if (argc < 2){
         std::cout<<"Usage: ./puzzle FILE_PATH"<<std::endl;
@@ -44,14 +54,21 @@ int main(int argc, char *argv[]){
     std::string file_path = argv[1];
     std::vector<std::string> file_data;
     int *depths = nullptr;
+    int depths_size = 0;
+    int larger_depth_count = 0;
 
     if (!load_file(file_path, &file_data)){
         return 0;
     }
 
     // Set the depths array to be the same size as the file data
-    depths = new int[file_data.size()];
+    depths_size = file_data.size();
+    depths = new int[depths_size];
     convert_string_vector_to_array(&file_data, depths);
+
+    count_larger_depths(depths, &larger_depth_count, &depths_size);
+
+    std::cout<<larger_depth_count<<std::endl;
 
     return 1;
 }
