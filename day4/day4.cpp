@@ -10,13 +10,42 @@ typedef struct BingoBoardEntry{
 
 class BingoBoard{
     private:
-        BingoBoardEntry_t **board_array = nullptr;
+        std::vector<std::vector<BingoBoardEntry_t>> board;
     public:
-        BingoBoard();
-        ~BingoBoard();
+        BingoBoard(){
+
+        }
+
+        ~BingoBoard(){
+
+        }
 
         BingoBoardEntry_t get_board_entry(int x, int y){
-            return board_array[x][y];
+            return board[x][y];
+        }
+
+        void add_new_line(std::string line){
+            std::vector<BingoBoardEntry_t> board_line;
+            std::string copy = line;
+
+            while (true){
+                std::string temp = copy.substr(0, 2);
+                int entry = 0;
+                entry = stoi(temp, nullptr, 10);
+                BingoBoardEntry_t temp_entry = {entry, false};
+
+                board_line.push_back(temp_entry);
+
+                copy = copy.substr(2, temp.length());
+                std::cout<<"temp: "<<temp<<std::endl;
+                std::cout<<"copy"<<copy<<std::endl;
+
+                if (copy.length() == 0){
+                    break;
+                }
+            }
+
+            board.push_back(board_line);
         }
 };
 
@@ -63,6 +92,11 @@ int main(int argc, char *argv[]){
      * PART ONE
      */
     //part one goes here
+    
+    for (int i = 0; i < int(file_data.size()); i++){
+        BingoBoard *board = new BingoBoard();
+        board->add_new_line(file_data.at(i));
+    }
 
     /*
      * PART TWO
