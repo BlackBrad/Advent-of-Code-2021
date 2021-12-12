@@ -24,6 +24,16 @@ class BingoBoard{
             return board[x][y];
         }
 
+        void mark_board(int value){
+            for (int i = 0; i < int(board.size()); i++){
+                for (int j = 0; j < int(board.at(i).size()); j++){
+                    if (board.at(i).at(j).entry == value){
+                        board.at(i).at(j).marked = true;
+                    }
+                }
+            }
+        }
+
         void add_new_line(std::string line){
             std::vector<BingoBoardEntry_t> board_line;
             std::string copy = line;
@@ -126,11 +136,7 @@ int main(int argc, char *argv[]){
      * PART ONE
      */
     //part one goes here
-    
-    for (int i = 0; i < int(file_data.size()); i++){
-        BingoBoard *board = new BingoBoard();
-        board->add_new_line(file_data.at(i));
-    }
+    std::vector<BingoBoard> boards = generate_bingo_boards(&file_data);
 
     /*
      * PART TWO
