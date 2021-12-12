@@ -36,18 +36,33 @@ class BingoBoard{
 
                 board_line.push_back(temp_entry);
 
-                copy = copy.substr(2, temp.length());
-                std::cout<<"temp: "<<temp<<std::endl;
-                std::cout<<"copy"<<copy<<std::endl;
-
-                if (copy.length() == 0){
+                if (copy.length() < 3){
                     break;
                 }
+
+                copy = copy.substr(3, copy.length());
             }
 
             board.push_back(board_line);
         }
 };
+
+std::vector<int> get_vector_of_marks(std::string marks){
+        std::vector<int> vector_of_marks;
+
+        int current_index = 0;
+        int end_index = 0;
+
+        std::string copy = marks;
+
+        while (current_index < marks.length()){
+            std::string temp = "";
+            int comma = copy.find(',');
+
+        }
+
+        return vector_of_marks;
+}
 
 bool load_file(std::string file_path, std::vector<std::string> *file_data){
     std::string temp_line;
