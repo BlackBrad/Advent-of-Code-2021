@@ -86,6 +86,25 @@ bool load_file(std::string file_path, std::vector<std::string> *file_data){
     return true;
 }
 
+std::vector<BingoBoard> generate_bingo_boards(
+        const std::vector<std::string> *file_data){
+    std::vector<BingoBoard> boards;
+
+    BingoBoard *temp_board = new BingoBoard();
+    for (int i = 2; i < int(file_data->size()); i++){
+        if (file_data->at(i).compare("") == 0){
+            boards.push_back(*temp_board);
+            temp_board = nullptr;
+            temp_board = new BingoBoard();
+            continue;
+        }
+
+        temp_board->add_new_line(file_data->at(i));
+    }
+
+    return boards;
+}
+
 int main(int argc, char *argv[]){
     /*
      * TEMPLATE
